@@ -11,3 +11,9 @@ To install TextCleanUp, use pip:
 pip install git+ssh://git@github.com/Suraj-0-0-Yadav/TextCleanUp.git
 ```
 
+## Uninstallation
+To uninstall TextCleanUp, use pip:
+
+```
+pip uninstall TextCleanUp
+```
