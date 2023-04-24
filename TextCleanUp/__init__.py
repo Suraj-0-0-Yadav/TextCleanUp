@@ -1,9 +1,9 @@
 from TextCleanUp import utils
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
-def get_wordcounts(text):
-    return utils._get_wordcounts(text)
+def get_word_count(text):
+    return utils._get_word_count(text)
 
 def get_char_count(text):
     return utils._get_char_count(text)
