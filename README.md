@@ -17,3 +17,29 @@ To uninstall TextCleanUp, use pip:
 ```
 pip uninstall TextCleanUp
 ```
+
+## Example
+
+```
+#import the package
+import TextCleanUp as tcu
+```
+
+```
+def CompleteTextCleanUp(text):
+    text = tcu.get_lower_case(text)
+    text = tcu.get_contraction_to_expansion(text)
+    text = str(tcu.get_spelling_correction(text))
+    text = tcu.remove_accented_chars(text)
+    text = tcu.remove_emails(text)
+    text = tcu.remove_html_tags(text)
+    text = tcu.remove_rt(text)
+    text = tcu.remove_stopwords(text)
+    text = tcu.remove_urls(text)
+    text = tcu.remove_multiple_whitespaces(text)
+    text = tcu.remove_special_characters(text)
+    return text
+
+>>> CompleteTextCleanUp("Hi, I'm leaning #DataScience and #MachineLearning what do you thing Im doing right ?")
+'hi leaning datascience machinelearning thing right'
+```
