@@ -853,7 +853,7 @@ def _get_spelling_correction(text: str) -> str:
     """
     return TextBlob(text).correct()
 
-def _get_complete_text_clean_up(text:str) -> str:
+def _get_complete_text_clean_up(text:str,spelling_correction=False) -> str:
     '''
     This function takes in a string of text and performs a series of text cleaning operations on it,
     including lowercasing, expanding contractions, spelling correction, removing accented characters,
@@ -872,7 +872,8 @@ def _get_complete_text_clean_up(text:str) -> str:
     '''
     text = _get_lower_case(text)
     text = _get_contraction_to_expansion(text)
-    text = str(_get_spelling_correction(text))
+    if spelling_correction:
+        text = str(_get_spelling_correction(text))
     text = _remove_accented_chars(text)
     text = _remove_emails(text)
     text = _remove_urls(text)
