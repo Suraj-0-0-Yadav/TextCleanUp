@@ -694,7 +694,7 @@ def _remove_stopwords(text: str) -> str:
 
 
 
-def _lemmatize_text(text: str) -> str:
+def _get_lemmatize_text(text: str) -> str:
     """
     Lemmatizes the input text string using the spaCy library and returns the lemmatized version.
 
@@ -703,9 +703,6 @@ def _lemmatize_text(text: str) -> str:
 
     Returns:
         str: The lemmatized version of the input text string.
-
-    Raises:
-        None
 
     Examples:
         >>> lemmatize_text("I am running in the park")
