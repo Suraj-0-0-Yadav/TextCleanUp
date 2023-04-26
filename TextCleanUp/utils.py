@@ -643,7 +643,7 @@ def _remove_html_tags(text: str) -> str:
         >>> remove_html_tags(text)
         'This is an example HTML text.'
     """
-    return BeautifulSoup(text,'lxml').get_text().strip()
+    return BeautifulSoup(text,'html.parser').get_text().strip()
 
 
 def _remove_accented_chars(text: str) -> str:
