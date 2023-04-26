@@ -531,7 +531,7 @@ def get_spelling_correction(text: str) -> str:
     """
     return utils._get_spelling_correction(text)
 
-def get_complete_text_clean_up(text:str) -> str:
+def get_complete_text_clean_up(text: str, spelling_correction: bool = False) -> str:
     '''
     This function takes in a string of text and performs a series of text cleaning operations on it,
     including lowercasing, expanding contractions, spelling correction, removing accented characters,
