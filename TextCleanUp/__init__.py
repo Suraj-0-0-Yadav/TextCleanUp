@@ -2,7 +2,7 @@ from TextCleanUp import utils
 from typing import List, Tuple
 import pandas as pd
 
-__version__ = '0.0.5'
+__version__ = '0.0.6'
 
 def get_word_count(text: str) -> int: 
     """
