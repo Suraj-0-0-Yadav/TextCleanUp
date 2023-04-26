@@ -853,22 +853,23 @@ def _get_spelling_correction(text: str) -> str:
     """
     return TextBlob(text).correct()
 
-def _get_complete_text_clean_up(text:str,spelling_correction=False) -> str:
+def _get_complete_text_clean_up(text: str, spelling_correction: bool = False) -> str:
     '''
     This function takes in a string of text and performs a series of text cleaning operations on it,
-    including lowercasing, expanding contractions, spelling correction, removing accented characters,
+    including lowercasing, expanding contractions, optional spelling correction, removing accented characters,
     emails, URLs, HTML tags, RT (retweet) mentions, stopwords, special characters, lemmatization,
     and multiple whitespaces. The cleaned up text is returned as a string.
-    
+
     Args:
      - text (str): A string of text to be cleaned up.
+     - spelling_correction (bool): Optional flag to enable spelling correction. Default is False.
 
     Returns:
-     - str: A cleaned up version of the input text.
-    
+     - str: A cleaned-up version of the input text.
+
     Example:
-    >>> get_complete_text_clean_up("Hi, I'm leaning #DataScience and #MachineLearning what do you thing Im doing right ?")
-    'hi leaning datascience machinelearning thing right'
+    >>> get_complete_text_clean_up("Hi, I'm leaning #DataScience and #MachineLearning what do you thing Im doing right ?", spelling_correction=True)
+    'hi lean datascience machinelearning thing right'
     '''
     text = _get_lower_case(text)
     text = _get_contraction_to_expansion(text)
