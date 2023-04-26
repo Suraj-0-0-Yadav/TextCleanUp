@@ -548,4 +548,4 @@ def get_complete_text_clean_up(text: str, spelling_correction: bool = False) -> 
     >>> get_complete_text_clean_up("Hi, I'm leaning #DataScience and #MachineLearning what do you thing Im doing right ?")
     'hi leaning datascience machinelearning thing right'
     '''
-    return utils._get_complete_text_clean_up(text)
+    return utils._get_complete_text_clean_up(text,spelling_correction)
