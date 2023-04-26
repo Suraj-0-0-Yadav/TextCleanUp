@@ -2,7 +2,7 @@ from TextCleanUp import utils
 from typing import List, Tuple
 import pandas as pd
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 
 def get_word_count(text: str) -> int: 
     """
@@ -530,3 +530,22 @@ def get_spelling_correction(text: str) -> str:
     
     """
     return utils._get_spelling_correction(text)
+
+def get_complete_text_clean_up(text:str) -> str:
+    '''
+    This function takes in a string of text and performs a series of text cleaning operations on it,
+    including lowercasing, expanding contractions, spelling correction, removing accented characters,
+    emails, URLs, HTML tags, RT (retweet) mentions, stopwords, special characters, lemmatization,
+    and multiple whitespaces. The cleaned up text is returned as a string.
+    
+    Args:
+     - text (str): A string of text to be cleaned up.
+
+    Returns:
+     - str: A cleaned up version of the input text.
+    
+    Example:
+    >>> get_complete_text_clean_up("Hi, I'm leaning #DataScience and #MachineLearning what do you thing Im doing right ?")
+    'hi leaning datascience machinelearning thing right'
+    '''
+    return utils._get_complete_text_clean_up(text)

@@ -853,6 +853,37 @@ def _get_spelling_correction(text: str) -> str:
     """
     return TextBlob(text).correct()
 
+def _get_complete_text_clean_up(text:str) -> str:
+    '''
+    This function takes in a string of text and performs a series of text cleaning operations on it,
+    including lowercasing, expanding contractions, spelling correction, removing accented characters,
+    emails, URLs, HTML tags, RT (retweet) mentions, stopwords, special characters, lemmatization,
+    and multiple whitespaces. The cleaned up text is returned as a string.
+    
+    Args:
+     - text (str): A string of text to be cleaned up.
+
+    Returns:
+     - str: A cleaned up version of the input text.
+    
+    Example:
+    >>> get_complete_text_clean_up("Hi, I'm leaning #DataScience and #MachineLearning what do you thing Im doing right ?")
+    'hi leaning datascience machinelearning thing right'
+    '''
+    text = _get_lower_case(text)
+    text = _get_contraction_to_expansion(text)
+    text = str(_get_spelling_correction(text))
+    text = _remove_accented_chars(text)
+    text = _remove_emails(text)
+    text = _remove_urls(text)
+    text = _remove_html_tags(text)
+    text = _remove_rt(text)
+    text = _remove_stopwords(text)
+    text = _remove_special_characters(text)
+    text = _get_lemmatize_text(text)
+    text = _remove_multiple_whitespaces(text)
+    return text
+
 
 
 
