@@ -235,7 +235,7 @@ def _get_word_count(text: str) -> int:
     >>> get_word_count("Hello, this is a sample sentence.")
     6
     """
-    word_count = len(text.split())
+    word_count = len(str(text).split())
     return word_count
 
 def _get_char_count(text: str) -> int:
@@ -257,7 +257,7 @@ def _get_char_count(text: str) -> int:
     The 're.sub' function replaces all matching substrings with an empty string thereby removing them from the input string.
     The length of the resulting string gives us the count of non-whitespace characters in the input string.
     """
-    char_count = len(re.sub('\s+', "", text))
+    char_count = len(re.sub('\s+', "", str(text)))
     return char_count
 
 def _get_avg_wordlength(text: str) -> float:
@@ -275,7 +275,7 @@ def _get_avg_wordlength(text: str) -> float:
     >>> get_avg_wordlength(text)
     3.5
     """
-    avg_wordlength = _get_char_count(text)/_get_word_count(text)
+    avg_wordlength = _get_char_count(str)/_get_word_count(str(text))
     return avg_wordlength
 
 def _get_stopwords_count(text: str) -> int:
@@ -294,7 +294,7 @@ def _get_stopwords_count(text: str) -> int:
     4
     """
     # Split the text into individual words and convert to lowercase
-    words = [word.lower() for word in text.split()]
+    words = [word.lower() for word in str(text).split()]
 
     # Count the number of words that appear in the stopwords list
     stopwords_count = len([word for word in words if word in stopwords])
@@ -314,7 +314,7 @@ def _get_hashtag_count(text: str) -> int:
     # The regex pattern "#+\S+" matches one or more '#' characters followed by 
     # one or more non-whitespace characters. This will match any word starting 
     # with a '#' symbol.
-    hashtag_count = len(re.findall("#+\S+",text))
+    hashtag_count = len(re.findall("#+\S+",str(text)))
     return hashtag_count
 
 def _get_mentions_count(text: str) -> int:
@@ -330,7 +330,7 @@ def _get_mentions_count(text: str) -> int:
     # The regex pattern "@+\S+" matches one or more '@' characters followed by 
     # one or more non-whitespace characters. This will match any word starting 
     # with an '@' symbol.
-    mentions_count = len(re.findall("@+\S+", text))
+    mentions_count = len(re.findall("@+\S+", str(text)))
     
     return mentions_count
 
@@ -348,7 +348,7 @@ def _get_digit_count(text: str) -> int:
     # boundaries. This will match any sequence of consecutive digits in the text.
     # \b matches a word boundary, ensuring that the pattern only matches digits that
     # are not part of a larger word.
-    digit_count = len(re.findall(r'\b\d+\b', text))
+    digit_count = len(re.findall(r'\b\d+\b', str(text)))
     
     return digit_count
 
@@ -370,7 +370,7 @@ def _get_uppercase_word_count(text:str) -> int:
     # \b matches word boundaries
     # [A-Z]+ matches one or more consecutive uppercase letters
     # So, the regex matches all the uppercase words in the text
-    uppercase_word_count = len(re.findall(r'\b[A-Z]+\b',text))
+    uppercase_word_count = len(re.findall(r'\b[A-Z]+\b',str(text)))
 
     return uppercase_word_count
 
@@ -426,7 +426,7 @@ def _get_lower_case(text: str) -> str:
         >>> get_lower_case("HeLLo WoRLd!")
         'hello world!'
     """
-    return text.lower()
+    return str(text).lower()
 
 
 def _get_emails(text: str) -> Tuple[int, List[str]]:
@@ -452,7 +452,7 @@ def _get_emails(text: str) -> Tuple[int, List[str]]:
         - This function uses regular expressions to find email addresses in the input string. The regular expression used should match most common email formats, but may not match some less common formats.
         - If the input string contains non-email strings that appear similar to email addresses, they may be mistakenly identified as email addresses by this function.
     """
-    emails = re.findall('[\w.\-\+]+@[\w.\-\+]+\.[a-z]{2,}', text)
+    emails = re.findall('[\w.\-\+]+@[\w.\-\+]+\.[a-z]{2,}', str(text))
     email_count = len(set(emails))
     email_list = list(set(emails))
 
@@ -481,7 +481,7 @@ def _remove_emails(text: str) -> str:
         - If the input string contains non-email strings that appear similar to email addresses,
           they may be mistakenly identified as email addresses by this function and removed.
     """
-    return re.sub('[\w.\-\+]+@[\w.\-\+]+\.[a-z]{2,}', '', text)
+    return re.sub('[\w.\-\+]+@[\w.\-\+]+\.[a-z]{2,}', '', str(text))
 
 
 def _get_urls(text: str) -> Tuple[int, List[str]]:
@@ -510,7 +510,7 @@ def _get_urls(text: str) -> Tuple[int, List[str]]:
         - If the input string contains non-URL strings that appear similar to URLs,
           they may be mistakenly identified as URLs by this function.
     """
-    urls = re.findall('(?:https|http|ssh|ftp)://\S+', text)
+    urls = re.findall('(?:https|http|ssh|ftp)://\S+', str(text))
     url_counts = len(set(urls))
     url_list = list(set(urls))
 
@@ -540,7 +540,7 @@ def _remove_urls(text: str) -> str:
         - If the input string contains non-URL strings that appear similar to URLs,
           they may be mistakenly identified as URLs by this function and removed.
     """
-    return re.sub(r'(?:https|http|ssh|ftp)://\S+', '', text)
+    return re.sub(r'(?:https|http|ssh|ftp)://\S+', '', str(text))
 
 
 
@@ -567,7 +567,7 @@ def _remove_rt(text: str) -> str:
         - If the input string contains non-"RT" strings that appear similar to "RT",
           they may be mistakenly identified as "RT" by this function and removed.
     """
-    return re.sub(r'\brt\b', '', text)
+    return re.sub(r'\brt\b', '', str(text))
 
 
 
@@ -595,7 +595,7 @@ def _remove_special_characters(text: str) -> str:
         - If the input string contains non-special characters that are not letters or digits,
           they may be mistakenly identified as special characters by this function and removed.
     """
-    return re.sub(r'[^\w\s]', '', text)
+    return re.sub(r'[^\w\s]', '', str(text))
 
 
 
@@ -624,7 +624,7 @@ def _remove_multiple_whitespaces(text: str) -> str:
           they may be mistakenly identified as whitespace by this function and removed.
         - The resulting string will also have any leading or trailing whitespaces removed by using the built-in method "strip()".
     """
-    return re.sub(r'\s+', ' ', text).strip()
+    return re.sub(r'\s+', ' ', str(text)).strip()
 
 
 def _remove_html_tags(text: str) -> str:
@@ -643,7 +643,7 @@ def _remove_html_tags(text: str) -> str:
         >>> remove_html_tags(text)
         'This is an example HTML text.'
     """
-    return BeautifulSoup(text,'html.parser').get_text().strip()
+    return BeautifulSoup(str(text),'html.parser').get_text().strip()
 
 
 def _remove_accented_chars(text: str) -> str:
@@ -666,7 +666,7 @@ def _remove_accented_chars(text: str) -> str:
         >>> remove_accented_chars(text)
         "El nino juega en el jardin con un pequeno perro."
     """
-    text = unicodedata.normalize('NFKD',text).encode('ascii','ignore').decode('utf-8','ignore')
+    text = unicodedata.normalize('NFKD',str(text)).encode('ascii','ignore').decode('utf-8','ignore')
     return text
 
 
@@ -690,7 +690,7 @@ def _remove_stopwords(text: str) -> str:
         'summer, like swim cool water.'
     """
 
-    return ' '.join([word for word in text.split() if word.lower() not in stopwords])
+    return ' '.join([word for word in str(text).split() if word.lower() not in stopwords])
 
 
 
@@ -716,6 +716,7 @@ def _get_lemmatize_text(text: str) -> str:
     """
 
     # Process the input text string with the pipeline to obtain a spaCy Doc object
+    text = str(text)
     doc = nlp(text)
 
     # Iterate over each token in the Doc object and lemmatize it, storing it in a list
@@ -797,7 +798,7 @@ def _remove_common_word(text: str, freq: pd.Series, n: int = 20) -> str:
     top_n = [word.lower() for word in top_n.index]
     
     # Split the input text into individual words and remove the top n most frequent words
-    filtered_words = [word for word in text.split() if word.lower() not in top_n]
+    filtered_words = [word for word in str(text).split() if word.lower() not in top_n]
     
     # Join the remaining words back into a single string and return it
     filtered_text = ' '.join(filtered_words)
@@ -831,7 +832,7 @@ def _remove_rarewords(text: str, freq: pd.Series, n: int = 20) -> str:
     rare_n = [word.lower() for word in rare_n.index]
     
     # Remove the rare words from the text
-    cleaned_text = ' '.join([word for word in text.split() if word not in rare_n])
+    cleaned_text = ' '.join([word for word in str(text).split() if word not in rare_n])
 
     return cleaned_text
 
@@ -851,7 +852,7 @@ def _get_spelling_correction(text: str) -> str:
     'the cat is on the mat'
     
     """
-    return TextBlob(text).correct()
+    return TextBlob(str(text)).correct()
 
 def _get_complete_text_clean_up(text: str, spelling_correction: bool = False) -> str:
     '''
@@ -871,6 +872,7 @@ def _get_complete_text_clean_up(text: str, spelling_correction: bool = False) ->
     >>> get_complete_text_clean_up("Hi, I'm leaning #DataScience and #MachineLearning what do you thing Im doing right ?", spelling_correction=True)
     'hi lean datascience machinelearning thing right'
     '''
+    text = str(text)
     text = _get_lower_case(text)
     text = _get_contraction_to_expansion(text)
     if spelling_correction:
