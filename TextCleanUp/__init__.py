@@ -2,7 +2,7 @@ from TextCleanUp import utils
 from typing import List, Tuple, Union
 import pandas as pd
 
-__version__ = '0.0.9'
+__version__ = '0.1.0'
 
 def get_word_count(text: str) -> int: 
     """
@@ -111,7 +111,7 @@ def get_digit_count(text: str) -> int:
     """
     return utils._get_digit_count(text)
 
-def _get_uppercase_word_count(text:str, get_count_and_uppercase_words=False,get_only_uppercase_words=False) -> Union[int, Tuple[int,List[str]], List[str]]:
+def get_uppercase_word_count(text:str, get_count_and_uppercase_words=False,get_only_uppercase_words=False) -> Union[int, Tuple[int,List[str]], List[str]]:
     """
     This function takes a string as input and returns the count of uppercase words in it.
     
