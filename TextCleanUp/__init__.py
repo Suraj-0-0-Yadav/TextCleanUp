@@ -2,7 +2,7 @@ from TextCleanUp import utils
 from typing import List, Tuple
 import pandas as pd
 
-__version__ = '0.0.7'
+__version__ = '0.0.8'
 
 def get_word_count(text: str) -> int: 
     """
@@ -531,7 +531,51 @@ def get_spelling_correction(text: str) -> str:
     """
     return utils._get_spelling_correction(text)
 
-def get_complete_text_clean_up(text: str, spelling_correction: bool = False) -> str:
+def remove_repeated_chars(text: str) -> str:
+    """Removes repeated characters from a string.
+
+    Args:
+        text (str): The input string to modify.
+
+    Returns:
+        str: The modified string with all repeated characters removed.
+
+    Examples:
+        >>> remove_repeated_chars("hello")
+        'helo'
+
+        >>> remove_repeated_chars("The meeting was scheduled for Tuesday at 10am.")
+        'The meting was scheduled for Tuesday at 10am.'
+
+        >>> remove_repeated_chars("Mississippi")
+        'Misisipi.'
+
+    Regex Steps:
+    -------------
+    Here are the steps involved in applying this regex to a string:
+
+    1. The re.sub() function takes the pattern and replacement string as arguments, along with the input string.
+    2. The pattern r"(.)\1+" searches for any character that is repeated one or more times in a row. For example, if the input string is "hello", the pattern will match "ll" because it consists of the same character repeated twice.
+    3. The pattern uses a backreference \1 to refer to the first captured group (the single character in parentheses). This ensures that the replacement only removes repeated instances of the same character.
+    4. The replacement string r"\1" replaces the matched substring (e.g., "ll") with the first captured group (e.g., "l"). This effectively removes the repeated characters, leaving only one instance of each character in the final output.
+    5. The re.sub() function returns the modified string with all repeated characters removed.
+    """
+    return utils._remove_repeated_chars(text)
+
+def get_complete_text_clean_up(text: str, 
+                                lower_case=True,
+                                contraction_to_expansion=True,
+                                spelling_correction = False,
+                                remove_accented_chars=True,
+                                remove_emails=True,
+                                remove_urls=True,
+                                remove_html_tags=True,
+                                remove_rt=False,
+                                remove_stopwords=True,
+                                remove_special_characters=True,
+                                lemmatize_text=True,
+                                remove_multiple_whitespaces=True,
+                                remove_repeated_chars=False) -> str:
     '''
     This function takes in a string of text and performs a series of text cleaning operations on it,
     including lowercasing, expanding contractions, spelling correction, removing accented characters,
@@ -548,4 +592,17 @@ def get_complete_text_clean_up(text: str, spelling_correction: bool = False) -> 
     >>> get_complete_text_clean_up("Hi, I'm leaning #DataScience and #MachineLearning what do you thing Im doing right ?")
     'hi leaning datascience machinelearning thing right'
     '''
-    return utils._get_complete_text_clean_up(text,spelling_correction)
+    return utils._get_complete_text_clean_up(text, 
+                                lower_case,
+                                contraction_to_expansion,
+                                spelling_correction,
+                                remove_accented_chars,
+                                remove_emails,
+                                remove_urls,
+                                remove_html_tags,
+                                remove_rt,
+                                remove_stopwords,
+                                remove_special_characters,
+                                lemmatize_text,
+                                remove_multiple_whitespaces,
+                                remove_repeated_chars)
