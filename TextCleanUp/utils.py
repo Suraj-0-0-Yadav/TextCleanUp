@@ -907,8 +907,8 @@ def _remove_repeated_chars(text: str) -> str:
     5. The re.sub() function returns the modified string with all repeated characters removed.
     """
     # pattern = r"(.)\1+"  # Matches any character repeated one or more times
-    pattern = r"(.)\\1{2,}"  # Matches any character repeated two or more times
-    repl = r"\\1"  # Replaces the match with the first (and only) captured group
+    pattern = "(.)\\1{2,}"  # Matches any character repeated two or more times
+    repl = "\\1"  # Replaces the match with the first (and only) captured group
     return re.sub(pattern, repl, str(text))
 
 def _get_complete_text_clean_up(text: str, 
