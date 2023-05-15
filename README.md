@@ -8,7 +8,7 @@
 To install TextCleanUp, use pip:
 
 ```
-pip install git+ssh://git@github.com/Suraj-0-0-Yadav/TextCleanUp.git
+pip install git+https://git@github.com/Suraj-0-0-Yadav/TextCleanUp.git --upgrade --force-reinstall
 ```
 
 ## Uninstallation
@@ -26,20 +26,6 @@ import TextCleanUp as tcu
 ```
 
 ```
-def CompleteTextCleanUp(text):
-    text = tcu.get_lower_case(text)
-    text = tcu.get_contraction_to_expansion(text)
-    text = str(tcu.get_spelling_correction(text))
-    text = tcu.remove_accented_chars(text)
-    text = tcu.remove_emails(text)
-    text = tcu.remove_html_tags(text)
-    text = tcu.remove_rt(text)
-    text = tcu.remove_stopwords(text)
-    text = tcu.remove_urls(text)
-    text = tcu.remove_multiple_whitespaces(text)
-    text = tcu.remove_special_characters(text)
-    return text
-
->>> CompleteTextCleanUp("Hi, I'm leaning #DataScience and #MachineLearning what do you thing Im doing right ?")
+>>> tcu.get_complete_text_clean_up("Hi, I'm leaning #DataScience and #MachineLearning what do you thing Im doing right ?")
 'hi leaning datascience machinelearning thing right'
 ```
