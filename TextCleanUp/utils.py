@@ -954,6 +954,9 @@ def _get_complete_text_clean_up(text: str,
     text = str(text)
     if lower_case:
         text = _get_lower_case(text)
+    
+    if remove_repeated_chars:
+        text = _remove_repeated_chars(text)
 
     if contraction_to_expansion:
         text = _get_contraction_to_expansion(text)
@@ -984,9 +987,6 @@ def _get_complete_text_clean_up(text: str,
 
     if lemmatize_text:
         text = _get_lemmatize_text(text)
-
-    if remove_repeated_chars:
-        text = _remove_repeated_chars(text)
 
     if remove_multiple_whitespaces:
         text = _remove_multiple_whitespaces(text)
