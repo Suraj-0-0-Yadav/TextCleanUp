@@ -26,6 +26,6 @@ import TextCleanUp as tcu
 ```
 
 ```
->>> tcu.get_complete_text_clean_up("Hi, I'm leaning #DataScience and #MachineLearning what do you thing Im doing right ?")
-'hi leaning datascience machinelearning thing right'
+>>> tcu.get_complete_text_clean_up("Hi, I'm learning #DataScience and #MachineLearning what do you thing Im doing right ?")
+'hi learn datascience machinelearning thing right'
 ```
