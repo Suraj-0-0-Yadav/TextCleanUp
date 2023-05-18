@@ -134,6 +134,30 @@ def get_uppercase_word_count(text:str, get_count_and_uppercase_words=False,get_o
     """
     return utils._get_uppercase_word_count(text, get_count_and_uppercase_words,get_only_uppercase_words)
 
+def get_expand_abbreviations(text: str, abbreviations: dict) -> str:
+    """
+    Expands abbreviations in the given text using the provided dictionary of abbreviations.
+
+    Args:
+        text (str): The text to expand abbreviations in.
+        abbreviations (dict): A dictionary where keys are abbreviations and values are their expansions.
+
+    Returns:
+        str: The text with all abbreviations expanded.
+
+    Examples:
+        >>> abbreviations = {"btw": "by the way", "irl": "in real life"}
+        >>> text = "I met him irl btw"
+        >>> expand_abbreviations(text, abbreviations)
+        'I met him in real life by the way'
+
+        >>> abbreviations = {"lol": "laughing out loud", "btw": "by the way", "idk": "I do not know"}
+        >>> text = "I have no idea what he meant lol btw idk"
+        >>> expand_abbreviations(text, abbreviations)
+        'I have no idea what he meant laughing out loud by the way I do not know'
+    """
+    return utils._get_expand_abbreviations(text,abbreviations)
+
 def get_contraction_to_expansion(text:str) -> str:
     """
     This function takes in a string parameter `text` and returns its expanded form by converting common English

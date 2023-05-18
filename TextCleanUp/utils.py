@@ -458,7 +458,6 @@ abbreviations ={
 
 merged_contractions = contractions_list.copy()
 merged_contractions.update(new_contractions_list)
-merged_contractions.update(abbreviations)
 
 def _get_word_count(text: str) -> int: 
     """
@@ -648,6 +647,39 @@ def _get_uppercase_word_count(text:str, get_count_and_uppercase_words=False,get_
     
     else:
         return uppercase_word_count
+    
+def _get_expand_abbreviations(text: str, abbreviations: dict=abbreviations) -> str:
+    """
+    Replaces all abbreviations in the given text with their expanded forms from the provided dictionary or the custom
+    dictionary if provided by the user.
+    Args:
+       - text (str): The input text to expand abbreviations in.
+       - abbreviations (dict, optional): A dictionary containing abbreviations and their corresponding expansions.
+                                        Defaults to the pre-defined 'abbreviations' dictionary.
+
+    Returns:
+        str: The text with all abbreviations expanded.
+
+    Examples:
+        >>> abbreviations = {"btw": "by the way", "irl": "in real life"}
+        >>> text = "I met him irl btw"
+        >>> expand_abbreviations(text, abbreviations)
+        'I met him in real life by the way'
+
+        >>> abbreviations = {"lol": "laughing out loud", "btw": "by the way", "idk": "I do not know"}
+        >>> text = "I have no idea what he meant lol btw idk"
+        >>> expand_abbreviations(text, abbreviations)
+        'I have no idea what he meant laughing out loud by the way I do not know'
+    """
+    # Split the text into tokens using whitespace as separator
+    tokens = text.split()
+    # Iterate over each token and replace it with its expansion if it is an abbreviation
+    for i in range(len(tokens)):
+        if tokens[i] in abbreviations:
+            tokens[i] = abbreviations[tokens[i]]
+    # Join the expanded tokens back into a string and return it
+    return ' '.join(tokens)
+
 
 def _get_contraction_to_expansion(text:str) -> str:
     """
@@ -677,15 +709,13 @@ def _get_contraction_to_expansion(text:str) -> str:
     The `contractions` library is used to expand contractions like "I'm" to "I am", "you're" to "you are", etc.
     """
     
-
-    if type(text) is str:
-        text = contractions.fix(text)
-        for key in merged_contractions:
-            value = merged_contractions[key]
-            text = text.replace(key,value)
-        return text
-    else:
-        return text
+    text = str(text)
+    text = contractions.fix(text)
+    text = _get_expand_abbreviations(text)
+    for key in merged_contractions:
+        value = merged_contractions[key]
+        text = text.replace(key,value)
+    return text
 
 def _get_lower_case(text: str) -> str:
     """
