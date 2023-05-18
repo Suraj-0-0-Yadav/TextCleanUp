@@ -1278,6 +1278,63 @@ def _get_complete_text_clean_up(text: str,
 
     return text
 
+def _get_basic_features(df: pd.core.frame.DataFrame,
+                        col: str, 
+                        get_char_count: bool = True,
+                        get_word_count: bool = True, 
+                        get_avg_wordlength: bool = True,
+                        get_stopwords_count: bool = True, 
+                        get_hashtag_count: bool = True,
+                        get_mentions_count: bool = True, 
+                        get_digit_count: bool = True,
+                        get_uppercase_word_count: bool = True) -> pd.core.frame.DataFrame:
+    """
+    Computes basic text features for a given column in a Pandas DataFrame.
+    Features that this function calculate :
+       - Character count
+       - Word count
+       - Average word length
+       - Stopwords count
+       - Hashtag count
+       - Mentions count
+       - Digit count
+       - Uppercase word count
 
+    Args:
+        df: The input DataFrame.
+        col: The name of the column containing the text data.
+        get_char_count: If True, computes the character count. Default is True.
+        get_word_count: If True, computes the word count. Default is True.
+        get_avg_wordlength: If True, computes the average word length. Default is True.
+        get_stopwords_count: If True, computes the stopwords count. Default is True.
+        get_hashtag_count: If True, computes the hashtag count. Default is True.
+        get_mentions_count: If True, computes the mentions count. Default is True.
+        get_digit_count: If True, computes the digit count. Default is True.
+        get_uppercase_word_count: If True, computes the uppercase word count. Default is True.
+
+    Returns:
+        A new DataFrame with the added text features.
+    """
+    if type(df) == pd.core.frame.Dataframe:
+        if get_char_count:    
+            df['char_counts'] = df[col].apply(_get_char_count)
+        if get_word_count:
+            df['word_counts'] = df[col].apply(_get_word_count)
+        if get_avg_wordlength:
+            df['avg_wordlength'] = df[col].apply(_get_avg_wordlength)
+        if get_stopwords_count:
+            df['stopwords_counts'] = df[col].apply(_get_stopwords_count)
+        if get_hashtag_count:
+            df['hashtag_counts'] = df[col].apply(_get_hashtag_count)
+        if get_mentions_count:
+            df['mention_counts'] = df[col].apply(_get_mentions_count)
+        if get_digit_count:
+            df['digit_counts'] = df[col].apply(_get_digit_count)
+        if get_uppercase_word_count:
+            df['uppercase_counts'] = df[col].apply(_get_uppercase_word_count)
+        
+        return df
+    else:
+        print('ERROR: This function takes only Pandas DataFrame')
 
 

@@ -637,3 +637,51 @@ def get_complete_text_clean_up(text: str,
                                 lemmatize_text,
                                 remove_multiple_whitespaces,
                                 remove_repeated_chars)
+    
+def _get_basic_features(df: pd.core.frame.DataFrame,
+                        col: str, 
+                        get_char_count: bool = True,
+                        get_word_count: bool = True, 
+                        get_avg_wordlength: bool = True,
+                        get_stopwords_count: bool = True, 
+                        get_hashtag_count: bool = True,
+                        get_mentions_count: bool = True, 
+                        get_digit_count: bool = True,
+                        get_uppercase_word_count: bool = True) -> pd.core.frame.DataFrame:
+    """
+    Computes basic text features for a given column in a Pandas DataFrame.
+    Features that this function calculate :
+       - Character count
+       - Word count
+       - Average word length
+       - Stopwords count
+       - Hashtag count
+       - Mentions count
+       - Digit count
+       - Uppercase word count
+
+    Args:
+        df: The input DataFrame.
+        col: The name of the column containing the text data.
+        get_char_count: If True, computes the character count. Default is True.
+        get_word_count: If True, computes the word count. Default is True.
+        get_avg_wordlength: If True, computes the average word length. Default is True.
+        get_stopwords_count: If True, computes the stopwords count. Default is True.
+        get_hashtag_count: If True, computes the hashtag count. Default is True.
+        get_mentions_count: If True, computes the mentions count. Default is True.
+        get_digit_count: If True, computes the digit count. Default is True.
+        get_uppercase_word_count: If True, computes the uppercase word count. Default is True.
+
+    Returns:
+        A new DataFrame with the added text features.
+    """
+    return utils._get_basic_features(df,
+                                    col, 
+                                    get_char_count,
+                                    get_word_count, 
+                                    get_avg_wordlength,
+                                    get_stopwords_count, 
+                                    get_hashtag_count,
+                                    get_mentions_count, 
+                                    get_digit_count,
+                                    get_uppercase_word_count)
