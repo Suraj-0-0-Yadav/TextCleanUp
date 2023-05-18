@@ -221,7 +221,10 @@ new_contractions_list={
             "you've": "you have"}
 
 abbreviations ={
+    "₹" : "rupee",
     "€" : "euro",
+    "¥" : "yen",
+    "$" : "dollar",
     "4ao" : "for adults only",
     "a.m" : "before midday",
     "a3" : "anytime anywhere anyplace",
