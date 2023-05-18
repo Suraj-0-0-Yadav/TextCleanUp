@@ -20,26 +20,33 @@ def get_word_count(text: str) -> int:
     """
     return utils._get_word_count(text)
 
-def get_char_count(text: str) -> int:
+def get_char_count(text: str, char_count_with_whitespace=False) -> int:
     """
     This function takes a string as input and returns the count of non-whitespace characters in the string.
-
-    Parameters:
-    - text (str): The input string for which non-whitespace character count is to be calculated. 
+    
+    Args:
+        text (str): The input string for which non-whitespace character count is to be calculated.
+        char_count_with_whitespace (bool, optional): If True, the function will return the total number
+            of characters in the input string including whitespace. Default is False.
 
     Returns:
-    - int: The count of non-whitespace characters in the input string.
-
+        int: The count of non-whitespace characters in the input string if `char_count_with_whitespace` is False.
+             The total count of characters in the input string if `char_count_with_whitespace` is True.
+    
     Example:
-    >>> get_char_count('The quick brown fox jumps over the lazy dog.')
-    32
-
+        >>> _get_char_count('The quick brown fox jumps over the lazy dog.')
+        32
+        >>> _get_char_count('The quick brown fox jumps over the lazy dog.', True)
+        43
+    
     Explanation:
-    The regular expression '\s+' matches one or more whitespace characters including space, tab, newline, carriage return, etc.
-    The 're.sub' function replaces all matching substrings with an empty string thereby removing them from the input string.
-    The length of the resulting string gives us the count of non-whitespace characters in the input string.
+        The regular expression '\s+' matches one or more whitespace characters including space, tab, newline, carriage return, etc.
+        The 're.sub' function replaces all matching substrings with an empty string thereby removing them from the input string.
+        The length of the resulting string gives us the count of non-whitespace characters in the input string.
+        
+        If `char_count_with_whitespace` is True, then simply return the length of the input string without any processing.
     """
-    return utils._get_char_count(text)
+    return utils._get_char_count(text,char_count_with_whitespace)
 
 def get_avg_wordlength(text: str) -> float:
     """
