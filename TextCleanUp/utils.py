@@ -220,7 +220,7 @@ new_contractions_list={
             "you're": "you are",
             "you've": "you have"}
 
-with open('./data/abbreviations.json','r') as f:
+with open('data/abbreviations.json','r') as f:
     abb = json.load(f)
 
 merged_contractions = contractions_list.copy()
