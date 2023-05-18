@@ -1,6 +1,7 @@
 import re 
 import os
 import sys
+import json
 import contractions
 import numpy as np
 import pandas as pd
@@ -218,8 +219,13 @@ new_contractions_list={
             "you'll've": "you will have",
             "you're": "you are",
             "you've": "you have"}
+
+with open('./data/abbreviations.json','r') as f:
+    abb = json.load(f)
+
 merged_contractions = contractions_list.copy()
 merged_contractions.update(new_contractions_list)
+merged_contractions.update(abb)
 
 def _get_word_count(text: str) -> int: 
     """
