@@ -5,7 +5,7 @@ with open('./README.md','r') as file:
 
 setuptools.setup(
 	name = 'TextCleanUp', #this should be unique
-	version = '0.1.0',
+	version = '0.1.1',
 	author = 'Suraj Yadav',
 	author_email = 'sam124.sy@gmail.com',
 	description = 'Simplify your text data cleaning process with TextCleanUp',

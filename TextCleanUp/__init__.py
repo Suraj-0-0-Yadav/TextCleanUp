@@ -2,7 +2,7 @@ from TextCleanUp import utils
 from typing import List, Tuple, Union
 import pandas as pd
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 def get_word_count(text: str) -> int: 
     """
@@ -638,7 +638,7 @@ def get_complete_text_clean_up(text: str,
                                 remove_multiple_whitespaces,
                                 remove_repeated_chars)
     
-def _get_basic_features(df: pd.core.frame.DataFrame,
+def get_basic_features(df: pd.core.frame.DataFrame,
                         col: str, 
                         get_char_count: bool = True,
                         get_word_count: bool = True, 
