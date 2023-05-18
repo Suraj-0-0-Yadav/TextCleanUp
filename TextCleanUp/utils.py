@@ -1315,7 +1315,7 @@ def _get_basic_features(df: pd.core.frame.DataFrame,
     Returns:
         A new DataFrame with the added text features.
     """
-    if type(df) == pd.core.frame.Dataframe:
+    if type(df) == pd.core.frame.DataFrame:
         if get_char_count:    
             df['char_counts'] = df[col].apply(_get_char_count)
         if get_word_count:
