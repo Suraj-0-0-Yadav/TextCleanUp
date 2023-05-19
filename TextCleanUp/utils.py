@@ -225,6 +225,7 @@ abbreviations ={
     "€" : "euro",
     "¥" : "yen",
     "$" : "dollar",
+    "%" : " percent",
     "4ao" : "for adults only",
     "a.m" : "before midday",
     "a3" : "anytime anywhere anyplace",
