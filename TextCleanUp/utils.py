@@ -530,7 +530,7 @@ def _get_avg_wordlength(text: str) -> float:
     >>> get_avg_wordlength(text)
     3.5
     """
-    avg_wordlength = _get_char_count(str)/_get_word_count(str(text))
+    avg_wordlength = _get_char_count(str(text))/_get_word_count(str(text))
     return avg_wordlength
 
 def _get_stopwords_count(text: str) -> int:
