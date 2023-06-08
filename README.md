@@ -5,17 +5,13 @@
 #### The package also includes general feature extraction functions such as word count, character count, average characters per word, stop words count, count of hashtags and mentions, checking if numeric digits are present in tweets, and upper case word counts.
 ***
 
-## Dependencies
-```
-!pip install contractions
-!pip install spacy
-!pip install beautifulsoup4
-!pip install textblob
-```
-
 ## Installation
 To install TextCleanUp, use pip:
 
+```
+pip install git+https://git@github.com/Suraj-0-0-Yadav/TextCleanUp.git 
+```
+### OR
 ```
 pip install git+https://git@github.com/Suraj-0-0-Yadav/TextCleanUp.git --upgrade --force-reinstall
 ```
@@ -25,6 +21,14 @@ To uninstall TextCleanUp, use pip:
 
 ```
 pip uninstall TextCleanUp
+```
+
+## Dependencies
+```
+!pip install contractions
+!pip install spacy
+!pip install beautifulsoup4
+!pip install textblob
 ```
 
 ## Example
