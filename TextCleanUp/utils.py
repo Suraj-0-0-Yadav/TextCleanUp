@@ -14,7 +14,13 @@ from textblob import TextBlob
 from spacy.lang.en.stop_words import STOP_WORDS as stopwords
 stopwords.discard('not')
 
-nlp = spacy.load('en_core_web_sm')
+try:
+    # Attempt to load the model
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    # If the model is not found, download it
+    spacy.cli.download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
 
 contractions_list = { 
             "ain't": "am not",
