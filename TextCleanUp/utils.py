@@ -1344,4 +1344,60 @@ def _get_basic_features(df: pd.core.frame.DataFrame,
     else:
         print('ERROR: This function takes only Pandas DataFrame')
 
+def _get_complete_text_clean_up2(text: pd.Series, 
+                                lower_case=True,
+                                contraction_to_expansion=True,
+                                spelling_correction=False,
+                                remove_accented_chars=True,
+                                remove_emails=True,
+                                remove_urls=True,
+                                remove_html_tags=True,
+                                remove_rt=False,
+                                remove_stopwords=True,
+                                remove_special_characters=True,
+                                lemmatize_text=True,
+                                remove_multiple_whitespaces=True,
+                                remove_repeated_chars=False) -> pd.Series:
+    
+    text = text if isinstance(text, pd.Series) else pd.Series(text)
 
+    if lower_case:
+        text = text.apply(_get_lower_case)
+    
+    if remove_repeated_chars:
+        text = text.apply(_remove_repeated_chars)
+
+    if contraction_to_expansion:
+        text = text.apply(_get_contraction_to_expansion)
+
+    if spelling_correction:
+        text = text.apply(_get_spelling_correction)
+
+    if remove_accented_chars:
+        text = _remove_accented_chars(text)
+
+    if remove_emails:
+        text = text.apply(_remove_emails)
+
+    if remove_urls:
+        text = text.apply(_remove_urls)
+
+    if remove_html_tags:
+        text = text.apply(_remove_html_tags)
+
+    if remove_rt:
+        text = text.apply(_remove_rt)
+
+    if remove_stopwords:
+        text = text.apply(_remove_stopwords)
+
+    if remove_special_characters:
+        text = text.apply(_remove_special_characters)
+
+    if lemmatize_text:
+        text = text.apply(_get_lemmatize_text)
+
+    if remove_multiple_whitespaces:
+        text = text.apply(_remove_multiple_whitespaces)
+
+    return text
