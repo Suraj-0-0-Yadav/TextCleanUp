@@ -1374,7 +1374,7 @@ def _get_complete_text_clean_up2(text: pd.Series,
         text = text.apply(_get_spelling_correction)
 
     if remove_accented_chars:
-        text = _remove_accented_chars(text)
+        text = text.apply(_remove_accented_chars)
 
     if remove_emails:
         text = text.apply(_remove_emails)
