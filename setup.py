@@ -5,7 +5,7 @@ with open('./README.md','r') as file:
 
 setuptools.setup(
 	name = 'TextCleanUp', #this should be unique
-	version = '0.1.3',
+	version = '0.1.4',
 	author = 'Suraj Yadav',
 	author_email = 'sam124.sy@gmail.com',
 	description = 'Simplify your text data cleaning process with TextCleanUp',
@@ -22,5 +22,6 @@ setuptools.setup(
         'spacy',
         'beautifulsoup4',
         'textblob',
+        'dask'
     ]
 	)

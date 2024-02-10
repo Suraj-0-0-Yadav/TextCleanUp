@@ -10,6 +10,7 @@ from typing import List, Tuple, Union
 from bs4 import BeautifulSoup
 import unicodedata
 from textblob import TextBlob
+import dask.dataframe as dd
 
 from spacy.lang.en.stop_words import STOP_WORDS as stopwords
 stopwords.discard('not')
@@ -1401,3 +1402,96 @@ def _get_complete_text_clean_up2(text: pd.Series,
         text = text.apply(_remove_multiple_whitespaces)
 
     return text
+
+def _process_text_chunk(text: pd.Series, 
+                        lower_case=True,
+                        contraction_to_expansion=True,
+                        spelling_correction=False,
+                        remove_accented_chars=True,
+                        remove_emails=True,
+                        remove_urls=True,
+                        remove_html_tags=True,
+                        remove_rt=False,
+                        remove_stopwords=True,
+                        remove_special_characters=True,
+                        lemmatize_text=True,
+                        remove_multiple_whitespaces=True,
+                        remove_repeated_chars=False) -> pd.Series:
+    
+    text = text.copy() if isinstance(text, pd.Series) else pd.Series(text).copy()
+
+    if lower_case:
+        text = text.apply(_get_lower_case)
+    
+    if remove_repeated_chars:
+        text = text.apply(_remove_repeated_chars)
+
+    if contraction_to_expansion:
+        text = text.apply(_get_contraction_to_expansion)
+
+    if spelling_correction:
+        text = text.apply(_get_spelling_correction)
+
+    if remove_accented_chars:
+        text = text.apply(_remove_accented_chars)
+
+    if remove_emails:
+        text = text.apply(_remove_emails)
+
+    if remove_urls:
+        text = text.apply(_remove_urls)
+
+    if remove_html_tags:
+        text = text.apply(_remove_html_tags)
+
+    if remove_rt:
+        text = text.apply(_remove_rt)
+
+    if remove_stopwords:
+        text = text.apply(_remove_stopwords)
+
+    if remove_special_characters:
+        text = text.apply(_remove_special_characters)
+
+    if lemmatize_text:
+        text = text.apply(_get_lemmatize_text)
+
+    if remove_multiple_whitespaces:
+        text = text.apply(_remove_multiple_whitespaces)
+
+    return text
+
+def _get_complete_text_clean_up_fast(texts, 
+                                    lower_case=True,
+                                    contraction_to_expansion=True,
+                                    spelling_correction=False,
+                                    remove_accented_chars=True,
+                                    remove_emails=True,
+                                    remove_urls=True,
+                                    remove_html_tags=True,
+                                    remove_rt=False,
+                                    remove_stopwords=True,
+                                    remove_special_characters=True,
+                                    lemmatize_text=True,
+                                    remove_multiple_whitespaces=True,
+                                    remove_repeated_chars=False):
+    
+    texts = texts if isinstance(texts, pd.Series) else pd.Series(texts)
+
+    dask_texts = dd.from_pandas(texts, npartitions=10)  # Adjust the number of partitions based on available resources
+    processed_texts = dask_texts.map_partitions(_process_text_chunk, 
+                                                lower_case,
+                                                contraction_to_expansion,
+                                                spelling_correction,
+                                                remove_accented_chars,
+                                                remove_emails,
+                                                remove_urls,
+                                                remove_html_tags,
+                                                remove_rt,
+                                                remove_stopwords,
+                                                remove_special_characters,
+                                                lemmatize_text,
+                                                remove_multiple_whitespaces,
+                                                remove_repeated_chars).compute()
+    
+    return processed_texts

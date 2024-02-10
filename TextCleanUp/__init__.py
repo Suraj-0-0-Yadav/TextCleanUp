@@ -2,7 +2,7 @@ from TextCleanUp import utils
 from typing import List, Tuple, Union
 import pandas as pd
 
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 
 def get_word_count(text: str) -> int: 
     """
@@ -686,7 +686,7 @@ def get_basic_features(df: pd.core.frame.DataFrame,
                                     get_digit_count,
                                     get_uppercase_word_count)
 
-def get_complete_text_clean_up2(text: str, 
+def get_complete_text_clean_up2(text: pd.Series, 
                                 lower_case=True,
                                 contraction_to_expansion=True,
                                 spelling_correction = False,
@@ -699,7 +699,7 @@ def get_complete_text_clean_up2(text: str,
                                 remove_special_characters=True,
                                 lemmatize_text=True,
                                 remove_multiple_whitespaces=True,
-                                remove_repeated_chars=False) -> str:
+                                remove_repeated_chars=False) -> pd.Series:
    
     return utils._get_complete_text_clean_up2(text, 
                                             lower_case,
@@ -715,3 +715,33 @@ def get_complete_text_clean_up2(text: str,
                                             lemmatize_text,
                                             remove_multiple_whitespaces,
                                             remove_repeated_chars)
+
+def get_complete_text_clean_up_fast(text: pd.Series, 
+                                    lower_case=True,
+                                    contraction_to_expansion=True,
+                                    spelling_correction = False,
+                                    remove_accented_chars=True,
+                                    remove_emails=True,
+                                    remove_urls=True,
+                                    remove_html_tags=True,
+                                    remove_rt=False,
+                                    remove_stopwords=True,
+                                    remove_special_characters=True,
+                                    lemmatize_text=True,
+                                    remove_multiple_whitespaces=True,
+                                    remove_repeated_chars=False) -> pd.Series:
+   
+    return utils._get_complete_text_clean_up_fast(text, 
+                                                lower_case,
+                                                contraction_to_expansion,
+                                                spelling_correction,
+                                                remove_accented_chars,
+                                                remove_emails,
+                                                remove_urls,
+                                                remove_html_tags,
+                                                remove_rt,
+                                                remove_stopwords,
+                                                remove_special_characters,
+                                                lemmatize_text,
+                                                remove_multiple_whitespaces,
+                                                remove_repeated_chars)
