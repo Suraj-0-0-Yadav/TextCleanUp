@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 import unicodedata
 from textblob import TextBlob
 import dask.dataframe as dd
+from dask.diagnostics import ProgressBar
 
 from spacy.lang.en.stop_words import STOP_WORDS as stopwords
 stopwords.discard('not')
@@ -1493,5 +1494,8 @@ def _get_complete_text_clean_up_fast(texts,
                                                 lemmatize_text,
                                                 remove_multiple_whitespaces,
                                                 remove_repeated_chars).compute()
+    with ProgressBar():
+        result = processed_texts.compute()
+    return result
     
-    return processed_texts
+    # return processed_texts
